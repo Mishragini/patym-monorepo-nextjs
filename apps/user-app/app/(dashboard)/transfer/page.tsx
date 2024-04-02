@@ -1,3 +1,4 @@
+"use server"
 import prisma from "@repo/db/client";
 import { AddMoney } from "../../../components/AddMoneyCard";
 import { BalanceCard } from "../../../components/BalanceCard";
@@ -33,11 +34,12 @@ async function getOnRampTransactions() {
     }))
 }
 
-export default async function() {
+export default async function Page() {
     const balance = await getBalance();
+    console.log(balance);
     const transactions = await getOnRampTransactions();
 
-    return <div className="w-screen">
+    return (<div className="w-screen">
         <div className="text-4xl text-[#6a51a6] pt-8 mb-8 font-bold">
             Transfer
         </div>
@@ -52,5 +54,5 @@ export default async function() {
                 </div>
             </div>
         </div>
-    </div>
+    </div>)
 }

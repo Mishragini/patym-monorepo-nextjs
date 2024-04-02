@@ -4,7 +4,7 @@ const app=express();
 
 app.use(express.json());
 
-app.post("/hdfWebhook",(req,res)=>{
+app.post("/hdfcWebhook",async (req,res)=>{
     const paymentInformation:{
         token:string,
         userId:string,
@@ -13,6 +13,20 @@ app.post("/hdfWebhook",(req,res)=>{
         token:req.body.token,
         userId:req.body.user_identifier,
         amount:req.body.amount
+    }
+
+    const txn= await db.onRampTransaction.findFirst({
+        where:{
+            token:paymentInformation.token
+        }
+    })
+
+    if(txn?.status==="Success"){
+        return res.json(
+            {
+                message:"Transaction already completed"
+            }
+        )
     }
 
     try{
