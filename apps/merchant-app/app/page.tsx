@@ -1,13 +1,15 @@
-
-import { Card } from "@repo/ui/card";
+import {getServerSession} from "next-auth";
+import { redirect } from "next/navigation";
 import styles from "./page.module.css";
+import { authOptions } from "./lib/auth";
 
 
-export default function Page(): JSX.Element {
-  return (
-    <main className={styles.main}>
-      <div className="text-3xl">Hello</div>
-      <Card/>
-    </main>
-  );
+export default async function Page() {
+  const session=await getServerSession(authOptions);
+  if(session?.user){
+    redirect('/landing')
+  }else{
+    redirect('/api/auth/signin')
+    
+  }
 }
