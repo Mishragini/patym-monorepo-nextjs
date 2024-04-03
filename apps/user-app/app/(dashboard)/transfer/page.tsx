@@ -7,6 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 
 //adding this to test the github workflow
+//test2
 
 async function getBalance() {
     const session = await getServerSession(authOptions);
