@@ -5,7 +5,7 @@ import { authOptions } from "../auth";
 
 export async function createOnrampTxn(provider:string,amount:number){
 const session =await getServerSession(authOptions);
-if(!session.user||!session.user.id){
+if(!session?.user||!session?.user.id){
     return {
         message:"Unauthenticated request"
     }

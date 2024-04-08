@@ -5,7 +5,7 @@ import { authOptions } from "../../lib/auth";
 import { P2pTxn } from "../../../components/P2pTxn";
 async function getP2pTxn(){
     const sessions=await getServerSession(authOptions);
-    const userId = Number(sessions.user.id); 
+    const userId = Number(sessions?.user.id); 
     const txns = await prisma.p2pTransfer.findMany({
         where: {
             OR: [
