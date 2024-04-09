@@ -2,14 +2,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
 import prisma from "@repo/db/client";
-import { Prisma,PrismaClient} from '@prisma/client'
-type TransactionContext = Omit<PrismaClient<Prisma.PrismaClientOptions, never,DefaultArgs>, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use' | '$extends'>;
-type DefaultArgs = {
-  result: any;
-  model: any;
-  query: any;
-  client: any;
-};
+
 export async function p2pTransfer(to: string, amount: number) {
     const session = await getServerSession(authOptions);
     const from = session?.user?.id;
@@ -29,7 +22,7 @@ export async function p2pTransfer(to: string, amount: number) {
             message: "User not found"
         }
     }
-    await prisma.$transaction(async (tx:TransactionContext) => {
+    await prisma.$transaction(async (tx) => {
         const sanitizedFrom = Number(from);
 
         await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${sanitizedFrom} FOR UPDATE`;
