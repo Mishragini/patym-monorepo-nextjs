@@ -36,10 +36,11 @@ export const P2pTxn = ({
                         {t.time.toDateString()}
                     </div>
                 </div>
-                {(Number(session.data?.user?.id)===t.to)?<div className="flex flex-col justify-center">
-                    + Rs {t.amount / 100}
-                </div>:<div className="flex flex-col justify-center">
-                    - Rs {t.amount / 100}
+                {(Number(session.data?.user?.id)===t.to)?(
+                <div className="flex  justify-center">
+                    <span className="text-green-500 mr-2">+</span> Rs {t.amount / 100}
+                </div>):<div className="flex  justify-center">
+                    <span className="text-red-500 mr-2">-</span> Rs {t.amount / 100}
                 </div>}
                 
 

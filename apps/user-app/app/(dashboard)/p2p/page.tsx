@@ -3,6 +3,12 @@ import { SendCard } from "../../../components/SendCard";
 import prisma from "@repo/db/client";
 import { authOptions } from "../../lib/auth";
 import { P2pTxn } from "../../../components/P2pTxn";
+interface Transaction {
+    timestamp: Date;
+    amount: number;
+    toUserId: number;
+    fromUserId:number
+}
 async function getP2pTxn(){
     const sessions=await getServerSession(authOptions);
     const userId = Number(sessions?.user.id); 
@@ -14,7 +20,7 @@ async function getP2pTxn(){
             ]
         }
     });
-    return txns.map(t=>({
+    return txns.map((t:Transaction)=>({
         time:t.timestamp,
         amount:t.amount,
         to:t.toUserId,
