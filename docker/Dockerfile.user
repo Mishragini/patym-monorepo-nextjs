@@ -9,7 +9,7 @@ COPY packages ./packages
 
 RUN npm install
 
-RUN cd package/db && npx prisma generate && cd../..
+RUN cd packages/db && npx prisma generate && cd ../..
 
 RUN npm run build
 
