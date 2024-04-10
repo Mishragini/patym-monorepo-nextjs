@@ -6,6 +6,12 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**", ".vercel/**"]
     },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -13,5 +19,6 @@
       "cache": false,
       "persistent": true
     }
+    
   }
 }
